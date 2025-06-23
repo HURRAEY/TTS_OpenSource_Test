@@ -1,8 +1,17 @@
 # dia_local_test.py
 from dia.model import Dia
 import os, soundfile as sf
+from dotenv import load_dotenv
 
-os.environ["HF_TOKEN"] = "***REMOVED***"    # 읽기 권한 토큰
+# .env 파일에서 환경 변수 로드
+load_dotenv()
+
+# 환경 변수에서 토큰 읽기
+hf_token = os.getenv("HF_TOKEN")
+if not hf_token:
+    raise ValueError("HF_TOKEN 환경 변수가 설정되지 않았습니다. .env 파일을 확인하세요.")
+
+os.environ["HF_TOKEN"] = hf_token
 
 model = Dia.from_pretrained(
     "nari-labs/Dia-1.6B",

@@ -4,6 +4,11 @@ venv/
 env/
 ENV/
 
+# 환경 변수 파일
+.env
+.env.local
+.env.production
+
 # Python
 __pycache__/
 *.py[cod]
@@ -35,7 +40,6 @@ MANIFEST
 .ipynb_checkpoints
 
 # 환경 변수
-.env
 .venv
 env/
 venv/
