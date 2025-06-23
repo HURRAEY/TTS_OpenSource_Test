@@ -1,0 +1,22 @@
+from huggingface_hub import InferenceClienthf_...Lwssdfasdf
+import soundfile as sf
+
+HF_TOKEN = "***REMOVED***"
+client = InferenceClient(token=HF_TOKEN, model="nari-labs/Dia-1.6B")
+
+prompt = (
+    "[S1] Dia is an open-weights text-to-dialogue model. "
+    "[S2] You get full control over scripts and voices. "
+    "[S1] Wow, amazing! (laughs)"
+)
+
+print("→ 서버 호출 중… (첫 호출은 모델 로딩 때문에 시간이 더 걸릴 수 있습니다)")
+audio_bytes = client.text_to_speech(prompt)
+
+out_path = "dia_output.flac"
+with open(out_path, "wb") as f:
+    f.write(audio_bytes)
+print(f"완료! '{out_path}' 생성 완료.")
+
+data, sr = sf.read(out_path)
+print("샘플레이트:", sr, "Hz | 길이:", len(data)/sr, "초")
